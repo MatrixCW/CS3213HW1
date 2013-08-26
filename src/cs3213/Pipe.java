@@ -10,18 +10,23 @@ public class Pipe {
 	}
 	
 	public ArrayList<String> read(){
-		ArrayList<String> result = parse_Data;
-		parse_Data = null;
-		
-		return result;
+		return parse_Data;
 	}
 	
 	public void write(ArrayList<String> data){
 		parse_Data = data;
 	}
 	
-	public boolean isNotReady(){
+	public void commit(){
+		parse_Data = null;
+	}
+	
+	public boolean isReadyToWrite(){
 		return (parse_Data == null)?true:false;
+	}
+	
+	public boolean isReadyToRead(){
+		return (parse_Data == null)?false:true;
 	}
 
 }
