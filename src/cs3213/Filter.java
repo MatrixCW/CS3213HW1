@@ -17,5 +17,5 @@ public abstract class Filter implements Runnable{
 		}
 	}
 	
-	public abstract void perform();
+	protected  abstract void perform();
 }
