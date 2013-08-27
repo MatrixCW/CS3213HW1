@@ -20,13 +20,7 @@ public class Alphabetizer extends Filter{
 		
 		//if current output list is not empty try to write it into outpipe
 		if (outputPipe.isReadyToWrite() && this.inputList != null) {
-			//System.out.println("Alphabetizer is now writing outputs");
-			String[] sortStrings = inputList.toArray(new String[inputList.size()]);
-			Arrays.sort(sortStrings);
-			outputList = new ArrayList<String>(Arrays.asList(sortStrings));
 			
-			outputPipe.write(outputList);
-			inputList = null;
 		}
 	}
 	
