@@ -2,6 +2,8 @@ package cs3213;
 
 import java.util.ArrayList;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 public class Pipe {
 	private volatile ArrayList<String> parse_Data;
 	
@@ -10,7 +12,10 @@ public class Pipe {
 	}
 	
 	public ArrayList<String> read(){
-		return parse_Data;
+		ArrayList<String> result = new ArrayList<String>(parse_Data);
+		this.commit();
+		
+		return result;
 	}
 	
 	public synchronized void write(ArrayList<String> data){
@@ -18,10 +23,7 @@ public class Pipe {
 		
 		for (String string : data) {
 			System.out.println("Message from input filter:" + string);
-			System.out.flush();
 		}
-		
-		this.commit();
 	}
 	
 	public synchronized void commit(){

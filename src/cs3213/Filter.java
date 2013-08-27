@@ -3,10 +3,10 @@ package cs3213;
 import java.util.ArrayList;
 
 public abstract class Filter implements Runnable{
-	protected volatile Pipe inputPipe;
-	protected volatile Pipe outputPipe;
-	protected volatile ArrayList<String> inputList;
-	protected volatile ArrayList<String> outputList;
+	protected  Pipe inputPipe;
+	protected  Pipe outputPipe;
+	protected  ArrayList<String> inputList;
+	protected  ArrayList<String> outputList;
 	
 	public Filter(Pipe inputP, Pipe outputP){
 		inputPipe = inputP;

@@ -8,17 +8,17 @@ public class Main {
 
 	public static void main(String[] agrs){
 		Pipe inputShiftPipe = new Pipe();
-		//Pipe shiftAlphabetizer = new Pipe();
+		Pipe shiftAlphabetizer = new Pipe();
 		//Pipe alphabetizerOutput = new Pipe();
 		
 		
 		Filter input = new Input(null,inputShiftPipe);
-		//Filter shift = new CircularShift(inputShiftPipe, shiftAlphabetizer);
+		Filter shift = new CircularShift(inputShiftPipe, shiftAlphabetizer);
 		//Filter alphabetizer = new Alphabetizer(shiftAlphabetizer,alphabetizerOutput);
 		//Filter output = new Output(alphabetizerOutput, null);
 		
 		(new Thread(input)).start();
-		//(new Thread(shift)).start();
+		(new Thread(shift)).start();
 		//(new Thread(alphabetizer)).start();
 		//(new Thread(output)).start();
 		
