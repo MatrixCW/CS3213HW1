@@ -1,37 +1,28 @@
 package cs3213;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.LinkedList;
 
 public class Input extends Filter{
 	
-	private Scanner scanner;
+	LinkedList<ArrayList<String>> waitingList;
 	
 	public Input(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
-		inputList = new ArrayList<String>();
-		scanner = new Scanner(System.in);
+		waitingList = new LinkedList<ArrayList<String>>();
 	}
 
 	@Override
 	protected void perform() {
-		if(inputList.size()==0 && outputPipe.isReadyToWrite()){
-			inputList = this.getInputData();
-			
-			outputList = new ArrayList<String>(inputList);
-			inputList.remove(0);
-			
-			outputPipe.write(outputList);
+		if (waitingList.size()>0 && outputPipe.isReadyToWrite()) {
+			outputPipe.write(waitingList.poll());
 		}
 	}
 	
-	private ArrayList<String> getInputData() {
-		System.out.println("Input the String:");
+	public void inputStream(String str) {
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(str);
 		
-		String content = scanner.nextLine();
-		ArrayList<String> resultArrayList = new ArrayList<String>();
-		resultArrayList.add(content);
-		
-		return resultArrayList;
+		waitingList.add(list);
 	}
 }
