@@ -3,7 +3,7 @@ package cs3213;
 import java.util.ArrayList;
 
 public class Pipe {
-	private ArrayList<String> parse_Data;
+	private volatile ArrayList<String> parse_Data;
 	
 	public Pipe(){
 		parse_Data = null;
@@ -15,6 +15,13 @@ public class Pipe {
 	
 	public void write(ArrayList<String> data){
 		parse_Data = data;
+		
+		
+		for (String string : data) {
+			System.out.println("Message from input filter:" + string);
+		}
+		
+		this.commit();
 	}
 	
 	public void commit(){
