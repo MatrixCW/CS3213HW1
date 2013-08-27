@@ -18,8 +18,7 @@ public class Input extends Filter{
 	protected void perform() {
 		if (waitingList.size()>0 && outputPipe.isReadyToWrite()) {
 			synchronized (this) {
-				System.out.println("wo qu");
-				
+				//System.out.println("ready to write in input filter");
 				outputList = waitingList.poll();
 				outputPipe.write(outputList);
 			}
