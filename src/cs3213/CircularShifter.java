@@ -7,7 +7,8 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class CircularShifter extends Filter{
-	private final Set<String> ignoreWords = new HashSet<String>((Arrays.asList("is", "the", "of", "and", "as", "a", "after")));
+	private final Set<String> ignoreWords = 
+			new HashSet<String>((Arrays.asList("is", "the", "of", "and", "as", "a", "after")));
 	
 	public CircularShifter(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);

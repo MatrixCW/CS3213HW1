@@ -11,7 +11,6 @@ public class Input extends Filter{
 	public Input(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
 		waitingList = new LinkedList<ArrayList<String>>();
-		
 	}
 
 	@Override
@@ -22,7 +21,6 @@ public class Input extends Filter{
 				outputList = waitingList.poll();
 				outputPipe.write(outputList);
 			}
-				
 		}
 	}
 	

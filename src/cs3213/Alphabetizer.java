@@ -1,6 +1,7 @@
 package cs3213;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Alphabetizer extends Filter{
 
@@ -13,21 +14,17 @@ public class Alphabetizer extends Filter{
 	protected void performIndependentTask() {
 		
 		if (this.inputPipe.isReadyToRead() && this.inputList == null){
-				
-			System.out.println("Alphabetizer is now reading inputs");
+			//System.out.println("Alphabetizer is now reading inputs");
 			inputList = inputPipe.read();
-		}
-	
-		ArrayList<String> temp = new ArrayList<String>();
-		
-		for(String string : this.inputList){
-			temp.add(string);
 		}
 		
 		//if current output list is not empty try to write it into outpipe
 		if (outputPipe.isReadyToWrite() && this.inputList != null) {
-			System.out.println("Alphabetizer is now writing outputs");
-			outputList = temp;
+			//System.out.println("Alphabetizer is now writing outputs");
+			String[] sortStrings = inputList.toArray(new String[inputList.size()]);
+			Arrays.sort(sortStrings);
+			outputList = new ArrayList<String>(Arrays.asList(sortStrings));
+			
 			outputPipe.write(outputList);
 			inputList = null;
 		}

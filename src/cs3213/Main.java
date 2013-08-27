@@ -14,12 +14,12 @@ public class Main {
 		Filter input = new Input(null,inputShiftPipe);
 		Filter shift = new CircularShifter(inputShiftPipe, shiftAlphabetizer);
 		Filter alphabetizer = new Alphabetizer(shiftAlphabetizer,alphabetizerOutput);
-		//Filter output = new Output(alphabetizerOutput, null);
+		Filter output = new Output(alphabetizerOutput, null);
 		
 		(new Thread(input)).start();
 		(new Thread(shift)).start();
 		(new Thread(alphabetizer)).start();
-		//(new Thread(output)).start();
+		(new Thread(output)).start();
 		
 		startInput((Input)input);
 	}

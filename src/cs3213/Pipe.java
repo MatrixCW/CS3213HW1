@@ -25,9 +25,9 @@ public class Pipe {
 		this.parse_Data = temp;
 		
 		
-		for (String elements : this.parse_Data) {
-			System.out.println("Message from input filter:" + elements);
-		}
+//		for (String elements : this.parse_Data) {
+//			System.out.println("Message from input filter:" + elements);
+//		}
 	}
 	
 	public synchronized void commit(){
