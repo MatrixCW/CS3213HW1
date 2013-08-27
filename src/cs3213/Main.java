@@ -1,14 +1,16 @@
 package cs3213;
 
-import java.util.Scanner;
-
 public class Main {
 	
 	public static void main(String[] agrs){
-		Pipe inputShitPipe = new Pipe();
-		Filter input = new Input(null,inputShitPipe);
+		Pipe inputShiftPipe = new Pipe();
+		Pipe shiftAlphatizer = new Pipe();
+		
+		Filter input = new Input(null,inputShiftPipe);
+		Filter shift = new CircularShift(inputShiftPipe, shiftAlphatizer);
 		
 		(new Thread(input)).start();
+		(new Thread(shift)).start();
 	}
 
 }

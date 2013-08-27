@@ -5,22 +5,23 @@ import java.util.Scanner;
 
 public class Input extends Filter{
 	
-	private volatile ArrayList<String> outputList;
 	private Scanner scanner;
 	
 	public Input(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
-		outputList = new ArrayList<String>();
+		inputList = new ArrayList<String>();
 		scanner = new Scanner(System.in);
 	}
 
 	@Override
 	protected void perform() {
-		if(outputList.size()==0 && outputPipe.isReadyToWrite()){
-			outputList = this.getInputData();
+		if(inputList.size()==0 && outputPipe.isReadyToWrite()){
+			inputList = this.getInputData();
+			
+			outputList = new ArrayList<String>(inputList);
+			inputList.remove(0);
 			
 			outputPipe.write(outputList);
-			outputList.remove(0);
 		}
 	}
 	

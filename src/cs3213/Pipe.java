@@ -19,6 +19,8 @@ public class Pipe {
 		for (String string : data) {
 			System.out.println("Message from input filter:" + string);
 		}
+		
+		this.commit();
 	}
 	
 	public void commit(){
