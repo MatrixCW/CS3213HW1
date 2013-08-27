@@ -35,8 +35,8 @@ public class CircularShift extends Filter{
 	}
 	
 	private ArrayList<String> shiftWordsArray(ArrayList<String> inputArray){
-		String originString  = inputArray.get(0);
-		String[] spiltStrings = originString.split(" ");
+		String originString  = inputArray.get(0).trim();
+		String[] spiltStrings = originString.split("\\s+");
 		LinkedList<String> arrayOfKeywords = capitalizeKeyWords(spiltStrings);
 		
 		ArrayList<String> shiftArrays = new ArrayList<String>();
@@ -45,10 +45,10 @@ public class CircularShift extends Filter{
 			arrayOfKeywords.add(appendString);
 			
 			String head = arrayOfKeywords.get(0);
-			if(!ignoreWords.contains(head.toLowerCase())){
-				shiftArrays.add(keywordsStringBuild(arrayOfKeywords));
-			}else{
+			if(head.length() == 0 || ignoreWords.contains(head.toLowerCase())){
 				continue;
+			}else{
+				shiftArrays.add(keywordsStringBuild(arrayOfKeywords));
 			}
 		}
 		
