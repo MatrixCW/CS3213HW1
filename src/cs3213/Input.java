@@ -7,26 +7,33 @@ public class Input extends Filter{
 	
 	LinkedList<ArrayList<String>> waitingList;
 	
+	
 	public Input(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
-		inputList = new ArrayList<String>();
+		waitingList = new LinkedList<ArrayList<String>>();
+		
 	}
 
 	@Override
 	protected void perform() {
-		if (inputList.size()>0 && outputPipe.isReadyToWrite()) {
-			outputList = new ArrayList<String>(inputList);
-			outputPipe.write(outputList);
-			
-			inputList.remove(0);
+		if (waitingList.size()>0 && outputPipe.isReadyToWrite()) {
+			synchronized (this) {
+				System.out.println("wo qu");
+				
+				outputList = waitingList.poll();
+				outputPipe.write(outputList);
+			}
+				
 		}
 	}
 	
-	public void inputStream(String str) {
+	public synchronized void inputStream(String str) {
+		inputList = new ArrayList<String>();
 		inputList.add(str);
+		waitingList.add(inputList);
 	}
 	
-	public boolean isReadyToWriteIn(){
-		return inputList.size()==0?true:false;
-	}
+//	public boolean isReadyToWriteIn(){
+//		return inputList==null?true:false;
+//	}
 }

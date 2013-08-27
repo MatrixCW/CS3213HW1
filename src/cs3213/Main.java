@@ -1,5 +1,6 @@
 package cs3213;
 
+import java.lang.invoke.VolatileCallSite;
 import java.util.Scanner;
 
 public class Main {
@@ -7,17 +8,17 @@ public class Main {
 
 	public static void main(String[] agrs){
 		Pipe inputShiftPipe = new Pipe();
-		Pipe shiftAlphabetizer = new Pipe();
+		//Pipe shiftAlphabetizer = new Pipe();
 		//Pipe alphabetizerOutput = new Pipe();
 		
 		
 		Filter input = new Input(null,inputShiftPipe);
-		Filter shift = new CircularShift(inputShiftPipe, shiftAlphabetizer);
+		//Filter shift = new CircularShift(inputShiftPipe, shiftAlphabetizer);
 		//Filter alphabetizer = new Alphabetizer(shiftAlphabetizer,alphabetizerOutput);
 		//Filter output = new Output(alphabetizerOutput, null);
 		
 		(new Thread(input)).start();
-		(new Thread(shift)).start();
+		//(new Thread(shift)).start();
 		//(new Thread(alphabetizer)).start();
 		//(new Thread(output)).start();
 		
@@ -27,10 +28,8 @@ public class Main {
 	public static void startInput(Input input){
 		scanner = new Scanner(System.in);
 		while(true){
-			if(input.isReadyToWriteIn()){
-				System.out.println("Input String");
-				input.inputStream(scanner.nextLine());
-			}
+			System.out.println("Input String");
+			input.inputStream(scanner.nextLine());
 		}
 	}
 

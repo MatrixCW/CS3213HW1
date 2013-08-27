@@ -13,25 +13,26 @@ public class Pipe {
 		return parse_Data;
 	}
 	
-	public void write(ArrayList<String> data){
+	public synchronized void write(ArrayList<String> data){
 		parse_Data = data;
 		
 		for (String string : data) {
 			System.out.println("Message from input filter:" + string);
+			System.out.flush();
 		}
 		
 		this.commit();
 	}
 	
-	public void commit(){
+	public synchronized void commit(){
 		parse_Data = null;
 	}
 	
-	public boolean isReadyToWrite(){
+	public synchronized boolean isReadyToWrite(){
 		return (parse_Data == null)?true:false;
 	}
 	
-	public boolean isReadyToRead(){
+	public synchronized boolean isReadyToRead(){
 		return (parse_Data == null)?false:true;
 	}
 

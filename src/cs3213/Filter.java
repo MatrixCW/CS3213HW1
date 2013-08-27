@@ -3,8 +3,8 @@ package cs3213;
 import java.util.ArrayList;
 
 public abstract class Filter implements Runnable{
-	protected Pipe inputPipe;
-	protected Pipe outputPipe;
+	protected volatile Pipe inputPipe;
+	protected volatile Pipe outputPipe;
 	protected volatile ArrayList<String> inputList;
 	protected volatile ArrayList<String> outputList;
 	
