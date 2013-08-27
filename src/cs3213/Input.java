@@ -9,20 +9,24 @@ public class Input extends Filter{
 	
 	public Input(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
-		waitingList = new LinkedList<ArrayList<String>>();
+		inputList = new ArrayList<String>();
 	}
 
 	@Override
 	protected void perform() {
-		if (waitingList.size()>0 && outputPipe.isReadyToWrite()) {
-			outputPipe.write(waitingList.poll());
+		if (inputList.size()>0 && outputPipe.isReadyToWrite()) {
+			outputList = new ArrayList<String>(inputList);
+			outputPipe.write(outputList);
+			
+			inputList.remove(0);
 		}
 	}
 	
 	public void inputStream(String str) {
-		ArrayList<String> list = new ArrayList<String>();
-		list.add(str);
-		
-		waitingList.add(list);
+		inputList.add(str);
+	}
+	
+	public boolean isReadyToWriteIn(){
+		return inputList.size()==0?true:false;
 	}
 }
