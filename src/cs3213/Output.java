@@ -8,7 +8,7 @@ public class Output extends Filter{
 	}
 
 	@Override
-	protected void perform() {
+	protected void performIndependentTask() {
 		// TODO Auto-generated method stub
 		
 	}

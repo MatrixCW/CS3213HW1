@@ -6,15 +6,15 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class CircularShift extends Filter{
+public class CircularShifter extends Filter{
 	private final Set<String> ignoreWords = new HashSet<String>((Arrays.asList("is", "the", "of", "and", "as", "a", "after")));
 	
-	public CircularShift(Pipe inputP, Pipe outputP) {
+	public CircularShifter(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
 	}
 
 	@Override
-	protected void perform() {
+	protected void performIndependentTask() {
 		//if current input list is empty try to load from the inpipe
 		
 		if (inputPipe.isReadyToRead() && inputList == null){
@@ -27,8 +27,6 @@ public class CircularShift extends Filter{
 			//System.out.println("out");
 			outputList = shiftWordsArray(inputList);
 			outputPipe.write(outputList);
-			
-			outputPipe.commit();
 			
 			inputList = null;
 		}

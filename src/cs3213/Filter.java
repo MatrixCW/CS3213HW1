@@ -21,10 +21,10 @@ public abstract class Filter implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		while(true){
-			performSpecificTask();
+			performIndependentTask();
 		}
 	}
 
 	//SUbclasses will implement this method according to their own tasks
-	protected  abstract void performSpecificTask();
+	protected  abstract void performIndependentTask();
 }
