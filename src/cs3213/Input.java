@@ -1,37 +1,36 @@
 package cs3213;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Input extends Filter{
 	
 	private volatile ArrayList<String> outputList;
+	private Scanner scanner;
 	
 	public Input(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
 		outputList = new ArrayList<String>();
+		scanner = new Scanner(System.in);
 	}
 
 	@Override
 	protected void perform() {
-		while(true){
+		if(outputList.size()==0 && outputPipe.isReadyToWrite()){
+			outputList = this.getInputData();
 			
-			if(outputPipe.isReadyToWrite() && outputList.size() == 1){
-				outputPipe.write(outputList);
-				outputList.remove(0);
-				
-				break;
-			}
+			outputPipe.write(outputList);
+			outputList.remove(0);
 		}
 	}
 	
-	public void inputStream(String str){
-		System.out.println(str);
-	
-		outputList.add(str);
+	private ArrayList<String> getInputData() {
+		System.out.println("Input the String:");
+		
+		String content = scanner.nextLine();
+		ArrayList<String> resultArrayList = new ArrayList<String>();
+		resultArrayList.add(content);
+		
+		return resultArrayList;
 	}
-	
-	public boolean isReadyToWriteInto(){
-		return (outputList.size() == 0)?true:false;
-	}
-
 }

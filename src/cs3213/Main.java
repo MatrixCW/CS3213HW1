@@ -9,16 +9,6 @@ public class Main {
 		Filter input = new Input(null,inputShitPipe);
 		
 		(new Thread(input)).start();
-		
-		Scanner scan = new Scanner(System.in);
-		
-		while(true){
-			if (((Input)input).isReadyToWriteInto()) {
-				System.out.println("Input your string");
-				((Input)input).inputStream(scan.nextLine());
-			}
-		}
-		
 	}
 
 }
