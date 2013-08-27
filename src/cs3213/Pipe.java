@@ -2,27 +2,31 @@ package cs3213;
 
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 public class Pipe {
+	
 	private volatile ArrayList<String> parse_Data;
 	
 	public Pipe(){
-		parse_Data = null;
+		
 	}
 	
 	public ArrayList<String> read(){
-		ArrayList<String> result = new ArrayList<String>(parse_Data);
+		
+		ArrayList<String> current_Data = new ArrayList<String>(parse_Data);
 		this.commit();
 		
-		return result;
+		return current_Data;
 	}
 	
-	public synchronized void write(ArrayList<String> data){
-		parse_Data = data;
+	public synchronized void write(ArrayList<String> data_To_Write){
 		
-		for (String string : data) {
-			System.out.println("Message from input filter:" + string);
+		ArrayList<String> temp = new ArrayList<String>(data_To_Write);
+		
+		this.parse_Data = temp;
+		
+		
+		for (String elements : this.parse_Data) {
+			System.out.println("Message from input filter:" + elements);
 		}
 	}
 	
@@ -30,12 +34,23 @@ public class Pipe {
 		parse_Data = null;
 	}
 	
+	
 	public synchronized boolean isReadyToWrite(){
-		return (parse_Data == null)?true:false;
+		
+		if(parse_Data == null)
+			return true;
+		else
+			return false;
+		
 	}
 	
 	public synchronized boolean isReadyToRead(){
-		return (parse_Data == null)?false:true;
+		
+		if(parse_Data == null)
+			return false;
+		else
+			return true;
+		
 	}
 
 }

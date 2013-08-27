@@ -13,7 +13,7 @@ public class Main {
 		
 		
 		Filter input = new Input(null,inputShiftPipe);
-		Filter shift = new CircularShift(inputShiftPipe, shiftAlphabetizer);
+		Filter shift = new CircularShifter(inputShiftPipe, shiftAlphabetizer);
 		//Filter alphabetizer = new Alphabetizer(shiftAlphabetizer,alphabetizerOutput);
 		//Filter output = new Output(alphabetizerOutput, null);
 		
