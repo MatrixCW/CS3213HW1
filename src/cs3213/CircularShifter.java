@@ -6,6 +6,12 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+
+/*
+ * This class shift string according to words to ignore list.
+ * and capitalize the first word after shifting
+ */
+
 public class CircularShifter extends Filter{
 	
 	private final Set<String> ignoreWords = 
