@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Pipe {
 	
-	private volatile ArrayList<String> parse_Data;
+	private ArrayList<String> parse_Data;
 	
 	public Pipe(){
 		
