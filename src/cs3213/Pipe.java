@@ -30,7 +30,7 @@ public class Pipe {
 //		}
 	}
 	
-	public synchronized void commit(){
+	private void commit(){
 		parse_Data = null;
 	}
 	

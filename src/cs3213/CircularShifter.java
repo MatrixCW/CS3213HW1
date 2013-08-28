@@ -44,7 +44,7 @@ public class CircularShifter extends Filter{
 			arrayOfKeywords.add(appendString);
 			
 			String head = arrayOfKeywords.get(0);
-			if(head.length() == 0 || ignoreWords.contains(head.toLowerCase())){
+			if(ignoreWords.contains(head.toLowerCase())){
 				continue;
 			}else{
 				shiftArrays.add(keywordsStringBuild(arrayOfKeywords));
