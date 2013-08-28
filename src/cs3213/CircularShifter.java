@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class CircularShifter extends Filter{
+	
 	private final Set<String> ignoreWords = 
 			new HashSet<String>((Arrays.asList("is", "the", "of", "and", "as", "a", "after")));
 	
@@ -19,17 +20,19 @@ public class CircularShifter extends Filter{
 		//if current input list is empty try to load from the inpipe
 		
 		if (inputPipe.isReadyToRead() && inputList == null){
-			//System.out.println("in");
+			System.out.println("CircularShifter is reading inputs");
 			inputList = inputPipe.read();
 		}
 		
+		outputList = shiftWordsArray(inputList);
+		
 		//if current output list is not empty try to write it into outpipe
 		if (outputPipe.isReadyToWrite() && inputList != null) {
-			//System.out.println("out");
-			outputList = shiftWordsArray(inputList);
-			outputPipe.write(outputList);
 			
+			System.out.println("CircularShifter is writing outputs");
+			outputPipe.write(outputList);
 			inputList = null;
+			
 		}
 	}
 	

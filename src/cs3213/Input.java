@@ -15,6 +15,7 @@ public class Input extends Filter{
 
 	@Override
 	protected void performIndependentTask() {
+		
 		if (waitingList.size()>0 && outputPipe.isReadyToWrite()) {
 			synchronized (this) {
 				//System.out.println("ready to write in input filter");
@@ -30,7 +31,4 @@ public class Input extends Filter{
 		waitingList.add(inputList);
 	}
 	
-//	public boolean isReadyToWriteIn(){
-//		return inputList==null?true:false;
-//	}
 }
