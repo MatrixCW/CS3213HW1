@@ -22,9 +22,15 @@ public class CircularShifter extends Filter{
 		if (inputPipe.isReadyToRead() && inputList == null){
 			System.out.println("CircularShifter is reading inputs");
 			inputList = inputPipe.read();
+			readyForProcessing = true;
 		}
 		
-		outputList = shiftWordsArray(inputList);
+		if(readyForProcessing){
+			
+			outputList = shiftWordsArray(inputList);
+
+			
+		}
 		
 		//if current output list is not empty try to write it into outpipe
 		if (outputPipe.isReadyToWrite() && inputList != null) {
@@ -32,6 +38,7 @@ public class CircularShifter extends Filter{
 			System.out.println("CircularShifter is writing outputs");
 			outputPipe.write(outputList);
 			inputList = null;
+			readyForProcessing = false;
 			
 		}
 	}

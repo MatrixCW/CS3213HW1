@@ -1,13 +1,14 @@
 package cs3213;
 
-import java.util.Scanner;
-
 public class Main {
-	private static Scanner scanner;
-
+	
 	public static void main(String[] agrs){
+		
+		//pipe connecting input reader and shifter 
 		Pipe inputShiftPipe = new Pipe();
+		//pipe connecting shifter and alphabetizer
 		Pipe shiftAlphabetizer = new Pipe();
+		//pipe connecting alphabetizer and output writer
 		Pipe alphabetizerOutput = new Pipe();
 		
 		
@@ -21,15 +22,8 @@ public class Main {
 		(new Thread(alphabetizer)).start();
 		(new Thread(output)).start();
 		
-		startInput((Input)input);
+		
 	}
 	
-	public static void startInput(Input input){
-		scanner = new Scanner(System.in);
-		while(true){
-			System.out.println("Input String");
-			input.inputStream(scanner.nextLine());
-		}
-	}
 
 }

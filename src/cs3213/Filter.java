@@ -10,6 +10,8 @@ public abstract class Filter implements Runnable{
 	protected  Pipe inputPipe;
 	protected  Pipe outputPipe;
 	
+	protected boolean readyForProcessing;
+	
 	protected  ArrayList<String> inputList;
 	protected  ArrayList<String> outputList;
 	
