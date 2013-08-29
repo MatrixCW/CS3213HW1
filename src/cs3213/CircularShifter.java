@@ -41,12 +41,12 @@ public class CircularShifter extends Filter{
 	
 	private Package shiftWordsPackage(Package inpackage){
 		ignoreWords = new HashSet<String>();
-		for (String keyword : inpackage.getKeywords()) {
+		for (String keyword : inpackage.getWordsToIgnore()) {
 			ignoreWords.add(keyword.toLowerCase());
 		}
 		
 		ArrayList<String> resultList = new ArrayList<String>();
-		for (String title : inpackage.getImplementString()) {
+		for (String title : inpackage.getStringsToProcess()) {
 			String[] titleParts = title.split("\\s+");
 			LinkedList<String> listOfWords = new LinkedList<String>(Arrays.asList(titleParts));
 			
@@ -62,7 +62,7 @@ public class CircularShifter extends Filter{
 			}
 		}
 		
-		return new Package(inpackage.getKeywords(), resultList);
+		return new Package(inpackage.getWordsToIgnore(), resultList);
 	}
 	
 	//return list of words with uppercase and lowercase

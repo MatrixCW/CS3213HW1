@@ -3,24 +3,27 @@ package cs3213;
 import java.util.ArrayList;
 
 public class Package {
-	private ArrayList<String> keywords;
-	private ArrayList<String> implementStrings;
+	
+	private ArrayList<String> wordsToIgnore;
+	private ArrayList<String> stringsToProcess;
+	
 	
 	public Package(Package inputPackage){
-		keywords = inputPackage.getKeywords();
-		implementStrings = inputPackage.getImplementString();
+		wordsToIgnore = inputPackage.getWordsToIgnore();
+		stringsToProcess = inputPackage.getStringsToProcess();
 	}
 	
-	public Package(ArrayList<String> keywordsStrArray, ArrayList<String> implementStrArray){
-		keywords = new ArrayList<String>(keywordsStrArray);
-		implementStrings = new ArrayList<String>(implementStrArray);
+	
+	public Package(ArrayList<String> wordsToIgnore, ArrayList<String> stringsToProcess){
+		this.wordsToIgnore = new ArrayList<String>(wordsToIgnore);
+		this.stringsToProcess = new ArrayList<String>(stringsToProcess);
 	}
 	
-	public ArrayList<String> getKeywords(){
-		return new ArrayList<String>(keywords);
+	public ArrayList<String> getWordsToIgnore(){
+		return new ArrayList<String>(wordsToIgnore);
 	}
 	
-	public ArrayList<String> getImplementString(){
-		return new ArrayList<String>(implementStrings);
+	public ArrayList<String> getStringsToProcess(){
+		return new ArrayList<String>(stringsToProcess);
 	}
 }

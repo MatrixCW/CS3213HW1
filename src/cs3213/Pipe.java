@@ -23,12 +23,12 @@ public class Pipe {
 		
 		this.parse_Data = temp;
 		
-		for (String elements : this.parse_Data.getKeywords()) {
-			System.out.println("Message from input filter:" + elements);
+		for (String elements : this.parse_Data.getWordsToIgnore()) {
+			//System.out.println("Message from input filter:" + elements);
 		}
 		
-		for (String elements : this.parse_Data.getImplementString()) {
-			System.out.println("Message from input filter:" + elements);
+		for (String elements : this.parse_Data.getStringsToProcess()) {
+			//System.out.println("Message from input filter:" + elements);
 		}
 	}
 	
