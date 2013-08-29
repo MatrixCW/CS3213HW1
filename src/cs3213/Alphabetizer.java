@@ -21,8 +21,7 @@ public class Alphabetizer extends Filter{
 			
 			System.out.println("Alphabetizer is now reading inputs");
 			inputPackage = inputPipe.read();
-			addToOutputString();
-		    sortOutputList();
+			outputPackage = sortOutputList();
 		}
 		
 		//if current output list is not empty try to write it into outpipe
@@ -36,26 +35,14 @@ public class Alphabetizer extends Filter{
 		}
 	}
 	
-	private void addToOutputString(){
-		
-//		if(outputList == null){
-//			
-//			outputList = new ArrayList<String>();
-//			
-//		}
-//		
-//		
-//		for(String string : inputList){
-//			
-//			outputList.add(string);
-//			
-//		}
-		
-	}
 	
-    private void sortOutputList(){
+    private Package sortOutputList(){
     	
-//    	Collections.sort(outputList);
+    	ArrayList<String> temp = inputPackage.getStringsToProcess();
+    	
+        Collections.sort(temp);
+        
+        return new Package(inputPackage.getWordsToIgnore(),temp);
 		
 	}
 	

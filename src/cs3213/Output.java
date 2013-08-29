@@ -15,6 +15,22 @@ public class Output extends Filter{
 	@Override
 	protected void performIndependentTask() {
 		// TODO Auto-generated method stub
+		
+		if(inputPackage == null && inputPipe.isReadyToRead()){
+			
+			inputPackage = inputPipe.read();
+			
+			for(String string : inputPackage.getStringsToProcess()){
+				
+				System.out.println(string);
+				
+			}
+			
+			inputPackage = null;
+			
+		
+			
+		}
 	}
 
 }
