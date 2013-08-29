@@ -1,7 +1,6 @@
 package cs3213;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Package {
 	private ArrayList<String> keywords;

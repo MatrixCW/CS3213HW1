@@ -1,7 +1,5 @@
 package cs3213;
 
-import java.util.ArrayList;
-
 /*THis is the abstract class filter.
 Input, Output, CircularShifter and Alphabetizer
 are sub-types of this class.*/

@@ -1,6 +1,5 @@
 package cs3213;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 

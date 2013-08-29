@@ -1,8 +1,5 @@
 package cs3213;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 /*
  * Instance of this class sorts a collection of strings
  * and pass them to the next filter for execution
