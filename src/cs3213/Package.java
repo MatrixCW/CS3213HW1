@@ -24,8 +24,4 @@ public class Package {
 	public ArrayList<String> getImplementString(){
 		return new ArrayList<String>(implementStrings);
 	}
-	
-	public void appendToImplementString(String str){
-		implementStrings.add(str);
-	}
 }

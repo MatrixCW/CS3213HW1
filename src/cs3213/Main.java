@@ -31,13 +31,22 @@ public class Main {
 	public static void startInput(Input input){
 		Scanner scanner = new Scanner(System.in);
 		while(true){
-			System.out.println("Input ignore words and spilt by '|', example: today|yesterday|history");
-			String keywords = scanner.nextLine();
-			System.out.println("Input titles and spilt by '|', example: The game of Throne | Harray Porter | Rice, Pray, Love");
-			String titles = scanner.nextLine();
-			
-			input.passPackage(new Package(new ArrayList<String>(Arrays.asList(keywords.split("\\|"))), 
-					new ArrayList<String>(Arrays.asList(titles.split("\\|")))));
+			System.out.println("Input ignore words and spilt by '|', example: after|the|a");
+			String keywords = scanner.nextLine().trim();
+			while(true){
+				System.out.println("Input the tile name or type 'exit' to change ignore words");
+				String titleString = scanner.nextLine().trim();
+				if (titleString.toLowerCase().equals("exit")) {
+					break;
+				}else{
+					String[] keywordsParts = keywords.split("\\|");
+					ArrayList<String> keywordsList = new ArrayList<String>(Arrays.asList(keywordsParts));
+					ArrayList<String> titleList = new ArrayList<String>();
+					titleList.add(titleString);
+					
+					input.passPackage(new Package(keywordsList, titleList));
+				}
+			}
 		}
 	}
 }
