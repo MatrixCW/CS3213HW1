@@ -5,6 +5,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+	
+	private static final String INPUT_IGNORE_WORDS_PROMPT = "Input ignore words and spilt by '|', example: today|yesterday|history";
+	private static final String INPUT_SRINGS_TO_PROCESS_PROMPT = "Input titles and spilt by '|', example: The game of Throne | Harray Porter | Eat, Pray, Love";
+    private static final String EXIT_MARK = "exit";
+    private static final String EXIT_PROMPT = "Enter exit to terminate program";
+    
+    private static ArrayList<Filter> childThreadObjects = new ArrayList<Filter>();
+	
 	public static void main(String[] agrs){
 		
 		//pipe connecting input reader and shifter 
@@ -20,25 +28,64 @@ public class Main {
 		Filter alphabetizer = new Alphabetizer(shiftAlphabetizer,alphabetizerOutput);
 		Filter output = new Output(alphabetizerOutput, null);
 		
-		(new Thread(input)).start();
-		(new Thread(shift)).start();
-		(new Thread(alphabetizer)).start();
-		(new Thread(output)).start();
+		Thread inputThread = new Thread(input);
+		Thread shiftThread = new Thread(input);
+		Thread alphabetizerThread = new Thread(input);
+		Thread outputThread = new Thread(input);
+		
+		childThreadObjects.add(input);
+		childThreadObjects.add(shift);
+		childThreadObjects.add(alphabetizer);
+		childThreadObjects.add(output);
+		
+		inputThread.start();
+		shiftThread.start();
+		alphabetizerThread.start();
+		outputThread.start();
+
 		
 		startInput((Input)input);
 	}
 	
 	public static void startInput(Input input){
+		
 		Scanner scanner = new Scanner(System.in);
+		
 		while(true){
-			System.out.println("Input ignore words and spilt by '|', example: today|yesterday|history");
+			
+			System.out.println(INPUT_IGNORE_WORDS_PROMPT);
+			System.out.println(EXIT_PROMPT);
 			String keywords = scanner.nextLine();
-			System.out.println("Input titles and spilt by '|', example: The game of Throne | Harray Porter | Rice, Pray, Love");
+			
+			System.out.println(INPUT_SRINGS_TO_PROCESS_PROMPT);
+			System.out.println(EXIT_PROMPT);
 			String titles = scanner.nextLine();
+			
+			if(titles.equals(EXIT_MARK)){
+				
+				scanner.close();
+				terminatePrograme();
+				break;
+				
+				
+			}
 			
 			input.passPackage(new Package(new ArrayList<String>(Arrays.asList(keywords.split("\\|"))), 
 					new ArrayList<String>(Arrays.asList(titles.split("\\|")))));
+			
 		}
 	}
+	
+	public static void terminatePrograme(){
+		
+		for(Filter flt : childThreadObjects){
+			
+			flt.terminate();
+			
+		}
+		
+	}
+	
+	
 
 }

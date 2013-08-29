@@ -13,6 +13,8 @@ public abstract class Filter implements Runnable{
 	protected  Package inputPackage;
 	protected  Package outputPackage;
 	
+	private volatile boolean running = true;
+	 
 	public Filter(Pipe inputPipe, Pipe outputPipe){
 		this.inputPipe = inputPipe;
 		this.outputPipe = outputPipe;
@@ -21,9 +23,15 @@ public abstract class Filter implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(true){
+		while(running){
 			performIndependentTask();
 		}
+	}
+	
+	public synchronized void terminate(){
+		
+		running = false;
+		
 	}
 
 	//SUbclasses will implement this method according to their own tasks
