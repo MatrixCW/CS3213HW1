@@ -10,7 +10,8 @@ public class Main {
 	private static final String INPUT_SRINGS_TO_PROCESS_PROMPT = "Input titles and spilt by '|', example: The game of Throne | Harray Porter | Eat, Pray, Love";
     private static final String EXIT_MARK = "exit";
     private static final String EXIT_PROMPT = "Enter exit to terminate program";
-    
+    private static final int PAUSE_DURATION = 500;
+
     private static ArrayList<Filter> childThreadObjects = new ArrayList<Filter>();
 	
 	public static void main(String[] agrs){
@@ -64,17 +65,24 @@ public class Main {
 			if(titles.equals(EXIT_MARK)){
 				
 				scanner.close();
-				terminatePrograme();
+				terminatePrograme(); //mark child threads to exit
 				break;
-				
 				
 			}
 			
 			input.passPackage(new Package(new ArrayList<String>(Arrays.asList(keywords.split("\\|"))), 
 					new ArrayList<String>(Arrays.asList(titles.split("\\|")))));
 			
+			try{
+				Thread.sleep(PAUSE_DURATION);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+			
 		}
 	}
+	
 	
 	public static void terminatePrograme(){
 		

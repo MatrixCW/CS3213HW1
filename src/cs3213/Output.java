@@ -18,7 +18,13 @@ public class Output extends Filter{
 		
 		if(inputPackage == null && inputPipe.isReadyToRead()){
 			
+			System.out.println("hahahaa");
+
+			
 			inputPackage = inputPipe.read();
+
+			
+			assert(inputPackage != null);
 			
 			for(String string : inputPackage.getStringsToProcess()){
 				

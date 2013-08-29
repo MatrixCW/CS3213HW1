@@ -1,7 +1,6 @@
 package cs3213;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /*
  * This class handles user input.
@@ -12,8 +11,6 @@ public class Input extends Filter{
 	
 	LinkedList<Package> waitingPackages;
 	
-	private static Scanner scanner;
-	
 	
 	public Input(Pipe inputP, Pipe outputP) {
 		
@@ -23,8 +20,11 @@ public class Input extends Filter{
 
 	@Override
 	protected void performIndependentTask(){
+		
 		if(outputPipe.isReadyToWrite() && waitingPackages.size()>0){
+			
 			synchronized (this) {
+				
 				inputPackage = waitingPackages.poll();
 				outputPackage = new Package(inputPackage);
 				outputPipe.write(outputPackage);
