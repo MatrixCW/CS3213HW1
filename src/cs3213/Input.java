@@ -29,7 +29,6 @@ public class Input extends Filter{
 				inputPackage = waitingPackages.poll();
 				outputPackage = new Package(inputPackage);
 				outputPipe.write(outputPackage);
-				outputPipe.commit();
 				
 				inputPackage = null;
 			}

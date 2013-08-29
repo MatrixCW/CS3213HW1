@@ -34,6 +34,7 @@ public class CircularShifter extends Filter{
 		if (outputPipe.isReadyToWrite() && inputPackage != null) {
 			System.out.println("CircularShifter is writing outputs");
 			outputPipe.write(outputPackage);
+			outputPipe.commit();
 			inputPackage = null;
 		}
 	}
@@ -61,7 +62,7 @@ public class CircularShifter extends Filter{
 			}
 		}
 		
-		return new Package(null, resultList);
+		return new Package(inpackage.getKeywords(), resultList);
 	}
 	
 	//return list of words with uppercase and lowercase
