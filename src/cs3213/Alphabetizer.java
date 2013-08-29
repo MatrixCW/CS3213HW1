@@ -17,24 +17,20 @@ public class Alphabetizer extends Filter{
 	@Override
 	protected void performIndependentTask() {
 		
-		if (this.inputPipe.isReadyToRead() && this.inputList == null){
+		if (this.inputPipe.isReadyToRead() && this.inputPackage == null){
 			
 			System.out.println("Alphabetizer is now reading inputs");
-			inputList = inputPipe.read();
-			readyForProcessing = true;
-		}
-		
-		if(readyForProcessing){
-		
+			inputPackage = inputPipe.read();
 			addToOutputString();
 		    sortOutputList();
 		}
+		
 		//if current output list is not empty try to write it into outpipe
-		if (outputPipe.isReadyToWrite() && this.inputList != null) {
+		if (outputPipe.isReadyToWrite() && this.inputPackage != null) {
 			
 			System.out.println("Alphabetizer is now producing outputs");
-			outputPipe.write(outputList);
-			inputList = null;//clean inputList for next read
+			outputPipe.write(outputPackage);
+			inputPackage = null;//clean inputList for next read
 			readyForProcessing = false;
 			
 		}
@@ -42,24 +38,24 @@ public class Alphabetizer extends Filter{
 	
 	private void addToOutputString(){
 		
-		if(outputList == null){
-			
-			outputList = new ArrayList<String>();
-			
-		}
-		
-		
-		for(String string : inputList){
-			
-			outputList.add(string);
-			
-		}
+//		if(outputList == null){
+//			
+//			outputList = new ArrayList<String>();
+//			
+//		}
+//		
+//		
+//		for(String string : inputList){
+//			
+//			outputList.add(string);
+//			
+//		}
 		
 	}
 	
     private void sortOutputList(){
     	
-    	Collections.sort(outputList);
+//    	Collections.sort(outputList);
 		
 	}
 	

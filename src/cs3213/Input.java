@@ -1,6 +1,7 @@
 package cs3213;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /*
@@ -10,10 +11,7 @@ import java.util.Scanner;
 
 public class Input extends Filter{
 	
-	private static final String WordsIgnorerPrompt = "Please enter words to ignore";
-	private static final String StringToProcessPrompt = "Please enter strings to process";
-	private static final String ExitPrompt = "If you are done, enter %exit% to continue" ;
-	private static final String ExitMark = "%exit%";
+	LinkedList<Package> waitingPackages;
 	
 	private static Scanner scanner;
 	
@@ -21,69 +19,25 @@ public class Input extends Filter{
 	public Input(Pipe inputP, Pipe outputP) {
 		
 		super(inputP, outputP);
-		outputList = new ArrayList<String>();
-	
+		waitingPackages = new LinkedList<Package>();
 	}
 
 	@Override
 	protected void performIndependentTask(){
-		
-		promptForIgnoringWords();
-		promptForProcessingStrings();
+		if(outputPipe.isReadyToWrite() && waitingPackages.size()>0){
+			synchronized (this) {
+				inputPackage = waitingPackages.poll();
+				outputPackage = new Package(inputPackage);
+				outputPipe.write(outputPackage);
+				outputPipe.commit();
+				
+				inputPackage = null;
+			}
+		} 
+	}
 	
+	public synchronized void passPackage(Package inputPackge){
+		waitingPackages.add(inputPackge);
 	}
 
-	
-	protected void promptForIgnoringWords(){
-		
-		scanner = new Scanner(System.in);
-		
-		int counter = 0;
-		System.out.println(WordsIgnorerPrompt);
-		
-		while(true){
-			counter++;
-			System.out.println("No. " + counter + " word to ignore: ");
-			System.out.println(ExitPrompt);
-			String currentInput = scanner.nextLine();
-			
-			if(currentInput.equals(ExitMark)){
-				break;
-			}
-				
-		}
-	}
-    
-     protected void promptForProcessingStrings(){
-		
-		scanner = new Scanner(System.in);
-		
-		int counter = 0;
-		System.out.println(StringToProcessPrompt);
-		
-		while(true){
-			
-			counter++;
-			System.out.println("No. " + counter + " string to process: ");
-			System.out.println(ExitPrompt);
-			String currentInput = scanner.nextLine();
-			
-			if(currentInput.equals(ExitMark)){
-				break;
-			}
-			
-			outputList.clear();
-			outputList.add(currentInput);
-			outputPipe.write(outputList);
-			
-			try{
-			 Thread.sleep(500);
-			}
-			catch(Exception e){
-				
-			}
-			
-		}
-	}
-	
 }

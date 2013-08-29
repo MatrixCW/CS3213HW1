@@ -4,33 +4,32 @@ import java.util.ArrayList;
 
 public class Pipe {
 	
-	private ArrayList<String> parse_Data;
+	private Package parse_Data;
 	
 	public Pipe(){
 		
 	}
 	
-	public ArrayList<String> read(){
+	public Package read(){
 		
-		ArrayList<String> current_Data = new ArrayList<String>(parse_Data);
+		Package current_Data = new Package(parse_Data);
 		this.commit();
 		
 		return current_Data;
 	}
 	
-	public synchronized void write(ArrayList<String> data_To_Write){
+	public synchronized void write(Package data_To_Write){
 		
-		ArrayList<String> temp = new ArrayList<String>(data_To_Write);
+		Package temp = new Package(data_To_Write);
 		
 		this.parse_Data = temp;
 		
-		
-//		for (String elements : this.parse_Data) {
-//			System.out.println("Message from input filter:" + elements);
-//		}
+		for (String elements : this.parse_Data.getImplementString()) {
+			System.out.println("Message from input filter:" + elements);
+		}
 	}
 	
-	private void commit(){
+	public void commit(){
 		parse_Data = null;
 	}
 	

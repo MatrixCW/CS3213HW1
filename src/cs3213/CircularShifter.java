@@ -14,8 +14,7 @@ import java.util.Set;
 
 public class CircularShifter extends Filter{
 	
-	private final Set<String> ignoreWords = 
-			new HashSet<String>((Arrays.asList("is", "the", "of", "and", "as", "a", "after")));
+	private Set<String> ignoreWords;
 	
 	public CircularShifter(Pipe inputP, Pipe outputP) {
 		super(inputP, outputP);
@@ -25,56 +24,51 @@ public class CircularShifter extends Filter{
 	protected void performIndependentTask() {
 		//if current input list is empty try to load from the inpipe
 		
-		if (inputPipe.isReadyToRead() && inputList == null){
+		if (inputPipe.isReadyToRead() && inputPackage == null){
 			System.out.println("CircularShifter is reading inputs");
-			inputList = inputPipe.read();
-			readyForProcessing = true;
-		}
-		
-		if(readyForProcessing){
-			
-			outputList = shiftWordsArray(inputList);
-
-			
+			inputPackage = inputPipe.read();
+			outputPackage = shiftWordsPackage(inputPackage);
 		}
 		
 		//if current output list is not empty try to write it into outpipe
-		if (outputPipe.isReadyToWrite() && inputList != null) {
-			
+		if (outputPipe.isReadyToWrite() && inputPackage != null) {
 			System.out.println("CircularShifter is writing outputs");
-			outputPipe.write(outputList);
-			inputList = null;
-			readyForProcessing = false;
-			
+			outputPipe.write(outputPackage);
+			inputPackage = null;
 		}
 	}
 	
-	private ArrayList<String> shiftWordsArray(ArrayList<String> inputArray){
-		String originString  = inputArray.get(0).trim();
-		String[] spiltStrings = originString.split("\\s+");
-		LinkedList<String> arrayOfKeywords = capitalizeKeyWords(spiltStrings);
+	private Package shiftWordsPackage(Package inpackage){
+		ignoreWords = new HashSet<String>();
+		for (String keyword : inpackage.getKeywords()) {
+			ignoreWords.add(keyword.toLowerCase());
+		}
 		
-		ArrayList<String> shiftArrays = new ArrayList<String>();
-		for (int i = 0; i < spiltStrings.length - 1; i++) {
-			String appendString = arrayOfKeywords.poll();
-			arrayOfKeywords.add(appendString);
+		ArrayList<String> resultList = new ArrayList<String>();
+		for (String title : inpackage.getImplementString()) {
+			String[] titleParts = title.split("\\s+");
+			LinkedList<String> listOfWords = new LinkedList<String>(Arrays.asList(titleParts));
 			
-			String head = arrayOfKeywords.get(0);
-			if(ignoreWords.contains(head.toLowerCase())){
-				continue;
-			}else{
-				shiftArrays.add(keywordsStringBuild(arrayOfKeywords));
+			for (int i = 0; i < listOfWords.size(); i++) {
+				String head = listOfWords.getFirst();
+				if(!ignoreWords.contains(head.toLowerCase())){
+					LinkedList<String>titleList = capitalizeKeyWordsInTitle(listOfWords);
+					resultList.add(titleStringBuild(titleList));
+				}
+				
+				listOfWords.poll();
+				listOfWords.addLast(head);
 			}
 		}
 		
-		return shiftArrays;
+		return new Package(null, resultList);
 	}
 	
-	private LinkedList<String> capitalizeKeyWords(String[] spiltStrings){
-		LinkedList<String> keywordsArray = new LinkedList<String>(Arrays.asList(spiltStrings));
+	//return list of words with uppercase and lowercase
+	private LinkedList<String> capitalizeKeyWordsInTitle(LinkedList<String> spiltStrings){
 		LinkedList<String> resultArray = new LinkedList<String>();
 		
-		for (String string : keywordsArray) {
+		for (String string : spiltStrings) {
 			if (ignoreWords.contains(string.toLowerCase())) {
 				resultArray.add(string.toLowerCase());
 			} else {
@@ -86,7 +80,8 @@ public class CircularShifter extends Filter{
 		return resultArray;
 	}
 	
-	private String keywordsStringBuild(LinkedList<String> keywordsArray){
+	//bulid the seperate linklist words into a string
+	private String titleStringBuild(LinkedList<String> keywordsArray){
 		String keywordString = "";
 		for (int i=0;i<keywordsArray.size()-1;i++) {
 			keywordString += keywordsArray.get(i)+" ";

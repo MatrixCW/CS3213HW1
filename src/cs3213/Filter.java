@@ -12,8 +12,8 @@ public abstract class Filter implements Runnable{
 	
 	protected boolean readyForProcessing;
 	
-	protected  ArrayList<String> inputList;
-	protected  ArrayList<String> outputList;
+	protected  Package inputPackage;
+	protected  Package outputPackage;
 	
 	public Filter(Pipe inputPipe, Pipe outputPipe){
 		this.inputPipe = inputPipe;
