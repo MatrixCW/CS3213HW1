@@ -23,8 +23,7 @@ public class Input extends Filter{
 		
 		if(outputPipe.isReadyToWrite() && waitingPackages.size()>0){
 			
-			synchronized (this) {
-				
+			synchronized (this) {		
 				inputPackage = waitingPackages.poll();
 				outputPackage = new Package(inputPackage);
 				outputPipe.write(outputPackage);

@@ -56,7 +56,7 @@ public class Main {
 			
 			System.out.println(INPUT_IGNORE_WORDS_PROMPT);
 			System.out.println(EXIT_PROMPT);
-			String keywords = scanner.nextLine();
+			String ignorewords = scanner.nextLine();
 			
 			System.out.println(INPUT_SRINGS_TO_PROCESS_PROMPT);
 			System.out.println(EXIT_PROMPT);
@@ -70,7 +70,8 @@ public class Main {
 				
 			}
 			
-			input.passPackage(new Package(new ArrayList<String>(Arrays.asList(keywords.split("\\|"))), 
+			System.out.println(Arrays.asList(ignorewords.split("\\|")));
+			input.passPackage(new Package(new ArrayList<String>(Arrays.asList(ignorewords.split("\\|"))), 
 					new ArrayList<String>(Arrays.asList(titles.split("\\|")))));
 			
 			try{
