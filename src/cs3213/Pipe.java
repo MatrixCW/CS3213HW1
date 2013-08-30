@@ -18,16 +18,12 @@ public class Pipe {
 	}
 	
 	public synchronized void write(Package data_To_Write){
-		
-		
 		Package temp = new Package(data_To_Write);
 		
 		this.parse_Data = temp;
-		
-
 	}
 	
-	public synchronized void commit(){
+	private void commit(){
 		parse_Data = null;
 	}
 	

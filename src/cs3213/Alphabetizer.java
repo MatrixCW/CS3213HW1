@@ -19,16 +19,12 @@ public class Alphabetizer extends Filter{
 	protected void performIndependentTask() {
 		
 		if (this.inputPipe.isReadyToRead() && this.inputPackage == null){
-			
-			System.out.println("Alphabetizer is now reading inputs");
 			inputPackage = inputPipe.read();
 			outputPackage = sortOutputList();
 		}
 		
 		//if current output list is not empty try to write it into outpipe
 		if (outputPipe.isReadyToWrite() && this.inputPackage != null) {
-			
-			System.out.println("Alphabetizer is now producing outputs");
 			outputPipe.write(outputPackage);
 			inputPackage = null;//clean inputList for next read
 			readyForProcessing = false;

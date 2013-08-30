@@ -25,14 +25,12 @@ public class CircularShifter extends Filter{
 		//if current input list is empty try to load from the inpipe
 		
 		if (inputPipe.isReadyToRead() && inputPackage == null){
-			System.out.println("CircularShifter is reading inputs");
 			inputPackage = inputPipe.read();
 			outputPackage = shiftWordsPackage(inputPackage);
 		}
 		
 		//if current output list is not empty try to write it into outpipe
 		if (outputPipe.isReadyToWrite() && inputPackage != null) {
-			System.out.println("CircularShifter is writing outputs");
 			outputPipe.write(outputPackage);
 			inputPackage = null;
 		}
@@ -92,6 +90,7 @@ public class CircularShifter extends Filter{
 		return keywordString;
 	}
 	
+	//capitalize the first letter of the word
 	private String capitalizeOneWord(String str){
 		String result;
 		if (str.length()>1) {
