@@ -69,10 +69,10 @@ public class Main {
 				
 			}
 			
-			System.out.println(Arrays.asList(ignorewords.split("\\|")));
 			input.passPackage(new Package(new ArrayList<String>(Arrays.asList(ignorewords.split("\\|"))), 
 					new ArrayList<String>(Arrays.asList(titles.split("\\|")))));
 			
+			//this try catch method is to make the interface friendlier. it can be moved
 			try{
 				Thread.sleep(PAUSE_DURATION);
 			}

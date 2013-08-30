@@ -27,21 +27,15 @@ public class Alphabetizer extends Filter{
 		if (outputPipe.isReadyToWrite() && this.inputPackage != null) {
 			outputPipe.write(outputPackage);
 			inputPackage = null;//clean inputList for next read
-			readyForProcessing = false;
-			
 		}
 	}
 	
 	
     private Package sortOutputList(){
-    	
     	ArrayList<String> temp = inputPackage.getStringsToProcess();
-    	System.out.println("this are the titles"+temp);
-    	
         Collections.sort(temp);
         
         return new Package(inputPackage.getWordsToIgnore(),temp);
-		
 	}
 	
 
