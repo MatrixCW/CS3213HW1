@@ -34,7 +34,6 @@ public class CircularShifter extends Filter{
 		if (outputPipe.isReadyToWrite() && inputPackage != null) {
 			System.out.println("CircularShifter is writing outputs");
 			outputPipe.write(outputPackage);
-			outputPipe.commit();
 			inputPackage = null;
 		}
 	}

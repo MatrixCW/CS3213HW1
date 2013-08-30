@@ -40,6 +40,7 @@ public class Alphabetizer extends Filter{
     private Package sortOutputList(){
     	
     	ArrayList<String> temp = inputPackage.getStringsToProcess();
+    	System.out.println("this are the titles"+temp);
     	
         Collections.sort(temp);
         

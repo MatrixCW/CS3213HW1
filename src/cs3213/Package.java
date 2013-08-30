@@ -9,8 +9,8 @@ public class Package {
 	
 	
 	public Package(Package inputPackage){
-		wordsToIgnore = new ArrayList<String>(inputPackage.getWordsToIgnore());
-		stringsToProcess = new ArrayList<String>(inputPackage.getStringsToProcess());
+		wordsToIgnore = inputPackage.getWordsToIgnore();
+		stringsToProcess = inputPackage.getStringsToProcess();
 	}
 	
 	

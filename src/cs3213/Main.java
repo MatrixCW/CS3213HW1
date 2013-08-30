@@ -30,9 +30,9 @@ public class Main {
 		Filter output = new Output(alphabetizerOutput, null);
 		
 		Thread inputThread = new Thread(input);
-		Thread shiftThread = new Thread(input);
-		Thread alphabetizerThread = new Thread(input);
-		Thread outputThread = new Thread(input);
+		Thread shiftThread = new Thread(shift);
+		Thread alphabetizerThread = new Thread(alphabetizer);
+		Thread outputThread = new Thread(output);
 		
 		childThreadObjects.add(input);
 		childThreadObjects.add(shift);
@@ -44,7 +44,6 @@ public class Main {
 		alphabetizerThread.start();
 		outputThread.start();
 
-		
 		startInput((Input)input);
 	}
 	
