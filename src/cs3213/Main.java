@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
 	
 	private static final String INPUT_IGNORE_WORDS_PROMPT = "Input ignore words and spilt by '|', example: today|yesterday|history";
-	private static final String INPUT_SRINGS_TO_PROCESS_PROMPT = "Input titles and spilt by '|', example: The game of Throne | Harray Porter | Eat, Pray, Love";
+	private static final String INPUT_SRINGS_TO_PROCESS_PROMPT = "Input titles and spilt by '|', example: The game of Throne|Harray Porter|Eat, Pray, Love";
     private static final String EXIT_MARK = "exit";
     private static final String EXIT_PROMPT = "Enter exit to terminate program";
     private static final int PAUSE_DURATION = 500;
